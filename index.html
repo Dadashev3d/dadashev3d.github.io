@@ -54,7 +54,8 @@ a { color: inherit }
 /* hero */
 .hero { display: grid; grid-template-columns: 1.35fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: end }
 .hero > * { min-width: 0 }
-.hero h1 { font-size: clamp(34px, 6vw, 72px); line-height: 1.02; margin-top: 18px }
+.hero > * { min-width: 0 }
+.hero h1 { font-size: clamp(30px, 4.4vw, 60px); line-height: 1.04; margin-top: 18px; hyphens: auto; overflow-wrap: break-word }
 .hero h1 .role { color: var(--accent) }
 .lead { font-size: clamp(17px, 1.6vw, 20px); color: var(--muted); max-width: 52ch; margin-top: 22px }
 .ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px }
@@ -66,10 +67,6 @@ a { color: inherit }
 .status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #2fa66a; box-shadow: 0 0 0 4px color-mix(in srgb, #2fa66a 22%, transparent) }
 
 .portrait { position: relative; aspect-ratio: 4/5; max-width: 100% }
-.dim-v { position: absolute; left: -22px; top: 0; bottom: 0; width: 1px; background: var(--muted) }
-.dim-v::before, .dim-v::after { content: ""; position: absolute; left: -4px; width: 9px; height: 1px; background: var(--muted) }
-.dim-v::before { top: 0 } .dim-v::after { bottom: 0 }
-.dim-v span { position: absolute; top: 50%; left: -8px; transform: translate(-50%, -50%) rotate(-90deg); font: 11px var(--mono); color: var(--muted); background: var(--sheet); padding: 0 6px; white-space: nowrap }
 
 /* placeholder frame for any missing image */
 .ph { position: relative; width: 100%; height: 100%; border: 1px dashed var(--muted); display: grid; place-items: center; overflow: hidden;
@@ -152,7 +149,7 @@ section + section { border-top: 1px solid var(--line) }
 
 @media (max-width: 900px) {
   .hero, .two { grid-template-columns: 1fr }
-  .portrait { max-width: 360px; margin-left: 22px }
+  .portrait { max-width: 360px }
   .works { grid-template-columns: 1fr 1fr } .work.wide { grid-column: span 2 }
   .services { grid-template-columns: 1fr } .svc { border-right: 0; border-bottom: 1px solid var(--line) } .svc:last-child { border-bottom: 0 }
   .steps { grid-template-columns: 1fr 1fr; gap: 24px } .specs { grid-template-columns: 1fr 1fr }
@@ -193,7 +190,6 @@ section + section { border-top: 1px solid var(--line) }
         </div>
       </div>
       <div class="portrait">
-        <div class="dim-v"><span>400 mm</span></div>
         <div class="media" id="photo" style="height:100%"></div>
       </div>
     </div>
