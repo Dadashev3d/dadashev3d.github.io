@@ -62,6 +62,13 @@ a { color: inherit }
 .hero h1 .role { color: var(--accent); display: inline-block; margin-top: 8px; font-size: 0.66em; line-height: 1.12 }
 .lead { font-size: clamp(17px, 1.6vw, 20px); color: var(--muted); max-width: 52ch; margin-top: 22px }
 .ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px }
+.soft { margin-top: 26px; display: grid; gap: 10px; max-width: 640px }
+.soft > div { display: grid; grid-template-columns: 128px 1fr; gap: 10px; align-items: baseline }
+.soft .label { color: var(--ink) }
+.chips { display: flex; flex-wrap: wrap; gap: 6px }
+.chips span { font: 500 13.5px var(--body); padding: 4px 10px; border: 1px solid var(--line); color: var(--ink); background: var(--paper) }
+.chips span.main { border-color: var(--accent); color: var(--accent) }
+@media (max-width: 520px) { .soft > div { grid-template-columns: 1fr; gap: 6px } }
 .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; font: 600 15px var(--body);
   text-decoration: none; border: 1px solid var(--ink); background: none; color: var(--ink); cursor: pointer }
 .btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink) }
@@ -191,6 +198,7 @@ section + section { border-top: 1px solid var(--line) }
         <span class="label status" data-t="status"></span>
         <h1><span id="name"></span><br><span class="role" data-t="role"></span></h1>
         <p class="lead" data-t="lead"></p>
+        <div class="soft" id="soft"></div>
         <div class="ctas">
           <a class="btn primary" href="#contact" data-t="ctaOrder"></a>
           <a class="btn" href="#works" data-t="ctaWorks"></a>
@@ -262,6 +270,13 @@ section + section { border-top: 1px solid var(--line) }
 const CONFIG = {
   name: { ru: "Руслан Дадашев", en: "Ruslan Dadashev" },
   photo: "images/me.jpg",
+  // Программы на главной. main: true — выделены цветом.
+  software: [
+    { k: { ru: "CAD и чертежи", en: "CAD & drawings" }, v: [["Fusion 360", 1], ["SolidWorks", 1], ["КОМПАС-3D"], ["AutoCAD"], ["FreeCAD"]] },
+    { k: { ru: "3D и рендер", en: "3D & rendering" }, v: [["Blender", 1], ["KeyShot", 1]] },
+    { k: { ru: "Фото и дизайн", en: "Photo & design" }, v: [["Photoshop", 1], ["Lightroom", 1], ["Illustrator"], ["Figma"], ["Canva"]] },
+    { k: { ru: "Видео", en: "Video" }, v: [["After Effects"], ["Premiere Pro"], ["DaVinci Resolve"]] }
+  ],
   // url — куда ведёт клик; value — что видно и что копируется.
   contacts: [
     { label: "Telegram", value: "@Rus9308", url: "https://t.me/Rus9308" },
@@ -355,7 +370,7 @@ const T = {
       ["Сдача", "Отдаю финальные файлы в нужных форматах и исходники."]
     ],
     fmtTitle: "Форматы, которые отдаю",
-    tools: "Инструменты: Fusion 360 · Blender · Photoshop · Lightroom",
+    tools: "Инструменты: Fusion 360, SolidWorks, КОМПАС-3D, AutoCAD, FreeCAD · Blender, KeyShot · Photoshop, Lightroom, Illustrator, Figma, Canva · After Effects, Premiere Pro, DaVinci Resolve",
     guarTitle: "Что вы получаете",
     guar: ["Точную цену и срок до начала работы", "Промежуточные результаты, без «чёрного ящика»", "Исходные файлы проекта", "NDA по запросу, работы не публикую без согласия"],
     contactEyebrow: "Контакты", contactTitle: "Расскажите о задаче", contactText: "Пришлите фото, эскиз или ссылку на пример. Отвечу с оценкой цены и срока в течение часа в рабочее время.",
@@ -379,7 +394,7 @@ const T = {
       ["Delivery", "Final files in the formats you need, plus source files."]
     ],
     fmtTitle: "Delivery formats",
-    tools: "Tools: Fusion 360 · Blender · Photoshop · Lightroom",
+    tools: "Tools: Fusion 360, SolidWorks, KOMPAS-3D, AutoCAD, FreeCAD · Blender, KeyShot · Photoshop, Lightroom, Illustrator, Figma, Canva · After Effects, Premiere Pro, DaVinci Resolve",
     guarTitle: "What you get",
     guar: ["A fixed price and deadline before I start", "Progress updates, no black box", "Project source files", "NDA on request; nothing published without your consent"],
     contactEyebrow: "Contact", contactTitle: "Tell me about your project", contactText: "Send photos, a sketch or a reference. I'll reply with a price and deadline within an hour during working hours.",
@@ -412,6 +427,9 @@ function render() {
   document.getElementById("stYear").textContent = new Date().getFullYear();
   media(document.getElementById("photo"), CONFIG.photo, CONFIG.name[lang]);
 
+  document.getElementById("soft").innerHTML = CONFIG.software.map(g =>
+    `<div><span class="label">${g.k[lang]}</span><div class="chips">${g.v.map(([n, m]) =>
+      `<span${m ? ' class="main"' : ""}>${lang === "en" && n === "КОМПАС-3D" ? "KOMPAS-3D" : n}</span>`).join("")}</div></div>`).join("");
   document.getElementById("specs").innerHTML = CONFIG.specs.map(s =>
     `<div><span class="label">${s.k[lang]}</span><b>${lang === "ru" ? s.v : s.ven}</b></div>`).join("");
 
