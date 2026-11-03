@@ -44,11 +44,14 @@ a { color: inherit }
 /* top bar */
 .bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
   padding: 14px clamp(20px, 4vw, 56px); border-bottom: 1px solid var(--line) }
-.bar nav { display: flex; gap: 18px; flex-wrap: wrap }
-.bar nav a { text-decoration: none; font-size: 14px; color: var(--muted) }
-.bar nav a:hover { color: var(--ink) }
-.lang { display: flex; border: 1px solid var(--line) }
-.lang button { font: 500 12px var(--mono); background: none; border: 0; color: var(--muted); padding: 6px 10px; cursor: pointer }
+.bar > .mono { font-weight: 500; font-size: 13px; color: var(--ink) }
+.bar nav { display: flex; gap: 8px; flex-wrap: wrap }
+.bar nav a { text-decoration: none; font: 600 15px var(--body); color: var(--ink); padding: 8px 16px;
+  border: 1px solid var(--line); transition: background .15s, color .15s, border-color .15s }
+.bar nav a:hover { background: var(--accent); border-color: var(--accent); color: var(--accent-ink) }
+.lang { display: flex; border: 1px solid var(--ink) }
+.lang button { font: 600 13px var(--mono); background: none; border: 0; color: var(--ink); padding: 8px 12px; cursor: pointer }
+.lang button:hover { color: var(--accent) }
 .lang button[aria-pressed="true"] { background: var(--ink); color: var(--sheet) }
 
 /* hero */
@@ -142,10 +145,14 @@ section + section { border-top: 1px solid var(--line) }
 .stamp > div { padding: 18px clamp(16px, 2.5vw, 28px); border-right: 1px solid var(--ink); min-width: 0 }
 .stamp > div:last-child { border-right: 0 }
 .stamp h2 { font-size: clamp(22px, 2.6vw, 30px); margin-top: 6px }
-.row { display: flex; justify-content: space-between; gap: 10px; padding-block: 6px; border-bottom: 1px solid var(--line); font-size: 15px; flex-wrap: wrap }
+.row { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding-block: 10px; border-bottom: 1px solid var(--line); font-size: 15px; flex-wrap: wrap }
+.row > .label { font-size: 13px; font-weight: 500; color: var(--ink) }
 .row:last-child { border-bottom: 0 }
-.row .v { font-family: var(--mono); font-size: 14px; word-break: break-all }
-.copy { font: 500 11px var(--mono); border: 1px solid var(--line); background: none; color: var(--muted); padding: 2px 8px; cursor: pointer; margin-left: 8px }
+.row .v { font: 600 16px var(--body); color: var(--accent); word-break: break-all }
+.row a.v { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px }
+.row a.v:hover { text-decoration-thickness: 2px }
+.copy { font: 600 12px var(--mono); border: 1px solid var(--accent); background: none; color: var(--accent); padding: 4px 10px; cursor: pointer; margin-left: 10px }
+.copy:hover { background: var(--accent); color: var(--accent-ink) }
 
 @media (max-width: 900px) {
   .hero, .two { grid-template-columns: 1fr }
