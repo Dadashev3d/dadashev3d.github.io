@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Руслан Дадашев — 3D-моделирование, CAD, визуализация и фото. Портфолио и контакты.">
+<title>Портфолио 3D и фото</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: engineering drawing sheet. Thin frame, dimension-line details, title block (штамп) as the contact footer. */
+:root {
+  --paper: #eceeec;
+  --sheet: #f7f8f6;
+  --ink: #16191b;
+  --muted: #5d666b;
+  --line: #c9cfcf;
+  --accent: #2346d8;
+  --accent-ink: #ffffff;
+  --display: "Unbounded", "Arial Black", sans-serif;
+  --body: "Onest", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #111416; --sheet: #171b1e; --ink: #e7ebec; --muted: #929ca1; --line: #2c3337;
+  --accent: #7d95ff; --accent-ink: #0d1020; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #111416; --sheet: #171b1e; --ink: #e7ebec; --muted: #929ca1; --line: #2c3337;
+  --accent: #7d95ff; --accent-ink: #0d1020; color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--paper); color: var(--ink); font: 16px/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 16px }
+.sheet { max-width: 1180px; margin: 0 auto; background: var(--sheet); border: 1px solid var(--ink); position: relative }
+.sheet::before { content: ""; position: absolute; inset: 6px; border: 1px solid var(--line); pointer-events: none }
+.wrap { padding: clamp(20px, 4vw, 56px) }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; letter-spacing: -0.01em }
+p { margin: 0 }
+a { color: inherit }
+.mono, .label { font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted) }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px }
+
+/* top bar */
+.bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 14px clamp(20px, 4vw, 56px); border-bottom: 1px solid var(--line) }
+.bar nav { display: flex; gap: 18px; flex-wrap: wrap }
+.bar nav a { text-decoration: none; font-size: 14px; color: var(--muted) }
+.bar nav a:hover { color: var(--ink) }
+.lang { display: flex; border: 1px solid var(--line) }
+.lang button { font: 500 12px var(--mono); background: none; border: 0; color: var(--muted); padding: 6px 10px; cursor: pointer }
+.lang button[aria-pressed="true"] { background: var(--ink); color: var(--sheet) }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 1.35fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: end }
+.hero > * { min-width: 0 }
+.hero h1 { font-size: clamp(34px, 6vw, 72px); line-height: 1.02; margin-top: 18px }
+.hero h1 .role { color: var(--accent) }
+.lead { font-size: clamp(17px, 1.6vw, 20px); color: var(--muted); max-width: 52ch; margin-top: 22px }
+.ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px }
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; font: 600 15px var(--body);
+  text-decoration: none; border: 1px solid var(--ink); background: none; color: var(--ink); cursor: pointer }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink) }
+.btn:hover { transform: translateY(-1px) }
+.status { display: inline-flex; align-items: center; gap: 8px }
+.status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #2fa66a; box-shadow: 0 0 0 4px color-mix(in srgb, #2fa66a 22%, transparent) }
+
+.portrait { position: relative; aspect-ratio: 4/5; max-width: 100% }
+.dim-v { position: absolute; left: -22px; top: 0; bottom: 0; width: 1px; background: var(--muted) }
+.dim-v::before, .dim-v::after { content: ""; position: absolute; left: -4px; width: 9px; height: 1px; background: var(--muted) }
+.dim-v::before { top: 0 } .dim-v::after { bottom: 0 }
+.dim-v span { position: absolute; top: 50%; left: -8px; transform: translate(-50%, -50%) rotate(-90deg); font: 11px var(--mono); color: var(--muted); background: var(--sheet); padding: 0 6px; white-space: nowrap }
+
+/* placeholder frame for any missing image */
+.ph { position: relative; width: 100%; height: 100%; border: 1px dashed var(--muted); display: grid; place-items: center; overflow: hidden;
+  background:
+    linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 24px 24px; }
+.ph::before, .ph::after { content: ""; position: absolute; background: var(--muted); opacity: .5 }
+.ph::before { width: 1px; height: 100%; left: 50% } .ph::after { height: 1px; width: 100%; top: 50% }
+.ph span { position: relative; z-index: 1; background: var(--sheet); padding: 6px 10px; font: 12px var(--mono); color: var(--muted); text-align: center; max-width: 80% }
+.media img { width: 100%; height: 100%; object-fit: cover; display: block }
+
+/* specs strip */
+.specs { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line) }
+.specs div { padding: 20px clamp(20px, 4vw, 56px); border-right: 1px solid var(--line); min-width: 0 }
+.specs div:last-child { border-right: 0 }
+.specs b { display: block; font: 700 22px var(--display); margin-top: 4px }
+
+section { padding-block: clamp(40px, 6vw, 80px) }
+section + section { border-top: 1px solid var(--line) }
+.head { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; margin-bottom: 32px }
+.head h2 { font-size: clamp(26px, 3.4vw, 40px) }
+
+/* filters + works */
+.filters { display: flex; gap: 8px; flex-wrap: wrap }
+.filters button { font: 500 13px var(--body); padding: 8px 14px; border: 1px solid var(--line); background: none; color: var(--ink); cursor: pointer }
+.filters button[aria-pressed="true"] { border-color: var(--ink); background: var(--ink); color: var(--sheet) }
+.works { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px 24px }
+.work { min-width: 0; display: flex; flex-direction: column; gap: 12px }
+.work .media { aspect-ratio: 4/3 }
+.work.wide { grid-column: span 2 } .work.wide .media { aspect-ratio: 16/9 }
+.work.tall .media { aspect-ratio: 3/4 }
+.work.fit .media { background: #fff } .work.fit .media img { object-fit: contain }
+.work .file { font: 500 13px var(--mono); color: var(--ink); text-underline-offset: 3px; align-self: start }
+.work .meta { display: flex; justify-content: space-between; gap: 12px }
+.work h3 { font-size: 17px; line-height: 1.3 }
+.work p { color: var(--muted); font-size: 14.5px }
+.tags { display: flex; gap: 6px; flex-wrap: wrap }
+.tags span { font: 11px var(--mono); padding: 3px 7px; border: 1px solid var(--line); color: var(--muted) }
+
+/* services */
+.services { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line) }
+.svc { padding: 28px; border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 14px; min-width: 0 }
+.svc:last-child { border-right: 0 }
+.svc h3 { font-size: 20px }
+.svc ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 15px }
+.svc li { padding-left: 18px; position: relative }
+.svc li::before { content: ""; position: absolute; left: 0; top: 0.75em; width: 9px; height: 1px; background: var(--accent) }
+.price { margin-top: auto; padding-top: 16px; border-top: 1px dashed var(--line); display: flex; justify-content: space-between; align-items: baseline; gap: 10px }
+.price b { font: 700 22px var(--display); font-variant-numeric: tabular-nums }
+
+/* process */
+.steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; counter-reset: s }
+.step { padding: 0 18px 0 0; min-width: 0 }
+.step .n { font: 500 12px var(--mono); color: var(--accent); display: flex; align-items: center; gap: 8px; margin-bottom: 12px }
+.step .n::after { content: ""; flex: 1; height: 1px; background: var(--line) }
+.step h3 { font: 600 16px var(--body); margin-bottom: 6px }
+.step p { font-size: 14.5px; color: var(--muted) }
+
+/* formats + guarantees */
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 56px) }
+.two > * { min-width: 0 }
+.two h3 { font-size: 20px; margin-bottom: 18px }
+.formats { display: flex; flex-wrap: wrap; gap: 8px }
+.formats span { font: 500 14px var(--mono); padding: 8px 12px; border: 1px solid var(--ink) }
+.formats small { display: block; font: 11px var(--body); color: var(--muted); text-transform: none; letter-spacing: 0 }
+.tools { margin-top: 22px; color: var(--muted); font-size: 15px }
+.guar { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none }
+.guar li { display: grid; grid-template-columns: 28px 1fr; gap: 10px }
+.guar li::before { content: "✓"; font: 600 15px var(--mono); color: var(--accent) }
+
+/* title block footer */
+.stamp { display: grid; grid-template-columns: 2fr 1fr 1fr; border-top: 1px solid var(--ink) }
+.stamp > div { padding: 18px clamp(16px, 2.5vw, 28px); border-right: 1px solid var(--ink); min-width: 0 }
+.stamp > div:last-child { border-right: 0 }
+.stamp h2 { font-size: clamp(22px, 2.6vw, 30px); margin-top: 6px }
+.row { display: flex; justify-content: space-between; gap: 10px; padding-block: 6px; border-bottom: 1px solid var(--line); font-size: 15px; flex-wrap: wrap }
+.row:last-child { border-bottom: 0 }
+.row .v { font-family: var(--mono); font-size: 14px; word-break: break-all }
+.copy { font: 500 11px var(--mono); border: 1px solid var(--line); background: none; color: var(--muted); padding: 2px 8px; cursor: pointer; margin-left: 8px }
+
+@media (max-width: 900px) {
+  .hero, .two { grid-template-columns: 1fr }
+  .portrait { max-width: 360px; margin-left: 22px }
+  .works { grid-template-columns: 1fr 1fr } .work.wide { grid-column: span 2 }
+  .services { grid-template-columns: 1fr } .svc { border-right: 0; border-bottom: 1px solid var(--line) } .svc:last-child { border-bottom: 0 }
+  .steps { grid-template-columns: 1fr 1fr; gap: 24px } .specs { grid-template-columns: 1fr 1fr }
+  .specs div:nth-child(2) { border-right: 0 } .specs div:nth-child(-n+2) { border-bottom: 1px solid var(--line) }
+  .stamp { grid-template-columns: 1fr } .stamp > div { border-right: 0; border-bottom: 1px solid var(--ink) } .stamp > div:last-child { border-bottom: 0 }
+}
+@media (max-width: 560px) {
+  .works { grid-template-columns: 1fr } .work.wide { grid-column: auto } .work.wide .media { aspect-ratio: 4/3 }
+  .steps { grid-template-columns: 1fr } .bar nav { display: none }
+}
+@media (prefers-reduced-motion: reduce) { .btn:hover { transform: none } }
+</style>
+
+<div class="sheet">
+  <header class="bar">
+    <span class="mono" data-t="brand"></span>
+    <nav>
+      <a href="#works" data-t="navWorks"></a>
+      <a href="#services" data-t="navServices"></a>
+      <a href="#process" data-t="navProcess"></a>
+      <a href="#contact" data-t="navContact"></a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button id="lang-ru" type="button" data-lang="ru">RU</button>
+      <button id="lang-en" type="button" data-lang="en">EN</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <span class="label status" data-t="status"></span>
+        <h1><span id="name"></span><br><span class="role" data-t="role"></span></h1>
+        <p class="lead" data-t="lead"></p>
+        <div class="ctas">
+          <a class="btn primary" href="#contact" data-t="ctaOrder"></a>
+          <a class="btn" href="#works" data-t="ctaWorks"></a>
+        </div>
+      </div>
+      <div class="portrait">
+        <div class="dim-v"><span>400 mm</span></div>
+        <div class="media" id="photo" style="height:100%"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="specs" id="specs"></div>
+
+  <div class="wrap" style="padding-block:0">
+    <section id="works">
+      <div class="head">
+        <div><span class="label" data-t="worksEyebrow"></span><h2 data-t="worksTitle"></h2></div>
+        <div class="filters" id="filters"></div>
+      </div>
+      <div class="works" id="worksGrid"></div>
+    </section>
+
+    <section id="services">
+      <div class="head"><div><span class="label" data-t="svcEyebrow"></span><h2 data-t="svcTitle"></h2></div></div>
+      <div class="services" id="svcGrid"></div>
+    </section>
+
+    <section id="process">
+      <div class="head"><div><span class="label" data-t="procEyebrow"></span><h2 data-t="procTitle"></h2></div></div>
+      <div class="steps" id="steps"></div>
+    </section>
+
+    <section>
+      <div class="two">
+        <div>
+          <h3 data-t="fmtTitle"></h3>
+          <div class="formats" id="formats"></div>
+          <p class="tools" data-t="tools"></p>
+        </div>
+        <div>
+          <h3 data-t="guarTitle"></h3>
+          <ul class="guar" id="guar"></ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="stamp" id="contact">
+    <div>
+      <span class="label" data-t="contactEyebrow"></span>
+      <h2 data-t="contactTitle"></h2>
+      <p style="color:var(--muted);margin-top:10px;max-width:46ch" data-t="contactText"></p>
+    </div>
+    <div id="contacts"></div>
+    <div>
+      <div class="row"><span class="label" data-t="stDev"></span><span class="v" id="stName"></span></div>
+      <div class="row"><span class="label" data-t="stSheet"></span><span class="v">1 / 1</span></div>
+      <div class="row"><span class="label" data-t="stScale"></span><span class="v">1:1</span></div>
+      <div class="row"><span class="label" data-t="stYear"></span><span class="v" id="stYear"></span></div>
+    </div>
+  </footer>
+</div>
+
+<script>
+/* ============================================================
+   НАСТРОЙКИ — всё, что нужно поменять, находится здесь.
+   Фото кладёшь в папку images/ рядом с этим файлом.
+   ============================================================ */
+const CONFIG = {
+  name: { ru: "Руслан Дадашев", en: "Ruslan Dadashev" },
+  photo: "images/me.jpg",
+  // url — куда ведёт клик; value — что видно и что копируется.
+  contacts: [
+    { label: "Telegram", value: "@Rus9308", url: "https://t.me/Rus9308" },
+    { label: "Email", value: "ruslancsc93@gmail.com" },
+    { label: "Upwork", value: "upwork.com/freelancers/~01d081676995e3a227", url: "https://www.upwork.com/freelancers/~01d081676995e3a227" },
+    { label: "Fiverr", value: "fiverr.com/ruslan9308", url: "https://www.fiverr.com/ruslan9308" },
+    { label: "FL.ru", value: "fl.ru/users/ruslancsc93", url: "https://www.fl.ru/users/ruslancsc93/" },
+    { label: "Freelancer", value: "freelancer.com/u/ruslan9308", url: "https://www.freelancer.com/u/ruslan9308" }
+  ],
+  // Цифры в полосе под шапкой. Пиши только правду.
+  specs: [
+    { k: { ru: "Корпусов под платы", en: "Board enclosures" }, v: "5 моделей", ven: "5 models" },
+    { k: { ru: "Срок ответа", en: "Reply time" }, v: "до 1 часа", ven: "< 1 hour" },
+    { k: { ru: "Бесплатные правки", en: "Free revisions" }, v: "2 круга", ven: "2 rounds" },
+    { k: { ru: "Часовой пояс", en: "Time zone" }, v: "UTC+3", ven: "UTC+3" }
+  ],
+  // Проекты. cat: cad | viz | photo. wide: true — карточка на две колонки.
+  works: [
+    { cat: "viz", tall: true, img: "images/render/perfume-mood.png",
+      t: { ru: "Флакон духов: имиджевый кадр", en: "Perfume bottle: hero shot" },
+      d: { ru: "Концепт-флакон, смоделированный с нуля в Fusion 360: толстостенное стекло, янтарная жидкость с преломлением спирта, латунь и орех. Тёмная студия с отражением.", en: "A concept bottle modeled from scratch in Fusion 360: thick glass, amber liquid with alcohol's refraction, brass and walnut. Dark studio with reflection." },
+      tags: ["Fusion 360", "Render", "Glass"] },
+    { cat: "viz", tall: true, img: "images/render/perfume-open.png",
+      t: { ru: "Флакон духов: без колпачка", en: "Perfume bottle: cap off" },
+      d: { ru: "Видно латунный распылитель и трубку внутри флакона. Белый фон и формат 3:4 по требованиям Wildberries и Ozon.", en: "Shows the brass sprayer and the dip tube. White background, 3:4 format for marketplace listings." },
+      tags: ["Render", "3:4", "Wildberries"] },
+    { cat: "viz", tall: true, img: "images/render/perfume-card.png",
+      t: { ru: "Карточка товара с инфографикой", en: "Listing card with infographic" },
+      d: { ru: "Готовая карточка для маркетплейса. Все цифры взяты из модели: жидкости ровно 50 мл, дно 12 мм, стенки 3,5 мм.", en: "A ready marketplace card. Every number comes from the model: exactly 50 ml of liquid, 12 mm base, 3.5 mm walls." },
+      tags: ["Infographic", "Ozon", "Wildberries"] },
+    { cat: "cad", wide: true, img: "images/render/corner-outer.png",
+      t: { ru: "Угловой соединитель трубы Ø25", en: "Corner connector for Ø25 tube" },
+      d: { ru: "Литой угольник для мебельных и торговых конструкций. Модель построена в Fusion 360 по эталону: габарит 70 × 70 × 30, гнёзда Ø25 глубиной 20 мм, сквозное отверстие под вертикальную трубу. Сечение рукава плавно переходит из скруглённого квадрата в круг.", en: "A die-cast corner fitting for furniture and retail frames. Modeled in Fusion 360 from a reference: 70 × 70 × 30 overall, Ø25 sockets 20 mm deep, a through hole for the vertical tube. The leg section blends smoothly from a rounded square into a circle." },
+      tags: ["Fusion 360", "Литьё", "Render"] },
+    { cat: "cad", img: "images/render/corner-inner.png",
+      t: { ru: "Угольник: сборка из трёх частей", en: "Corner connector: three-part assembly" },
+      d: { ru: "Внутренняя часть и две наружные, разъём по осям рукавов и по диагонали угла. Каждая наружная часть притянута винтом M6 ISO 4762 с площадки на внутренней стороне. Сборка проверена на пересечения.", en: "An inner part and two outer parts, split along the leg axes and the corner diagonal. Each outer part is pulled in by an ISO 4762 M6 screw from a shelf on the inner side. Interference-checked." },
+      tags: ["Сборка", "ISO 4762", "Render"] },
+    { cat: "cad", wide: true, img: "images/render/rpi4b-exploded.png",
+      t: { ru: "Генератор корпусов для электроники", en: "Parametric electronics enclosure generator" },
+      d: { ru: "Скрипт для Fusion 360 строит корпус под любую плату: Raspberry Pi 4, ESP32, STM32 BlackPill, Arduino Uno и Nano. Стойки под винты или полки, вырезы под разъёмы, крышка на защёлках, вентиляция. Допуски под FDM, проверка на пересечения. Новая плата добавляется за 15 минут.", en: "A Fusion 360 script that builds an enclosure for any board: Raspberry Pi 4, ESP32, STM32 BlackPill, Arduino Uno and Nano. Screw standoffs or ledges, connector cutouts, snap-fit lid, vents. FDM tolerances, interference-checked. A new board takes 15 minutes." },
+      tags: ["Fusion 360 API", "Python", "STEP", "STL"] },
+    { cat: "cad", img: "images/render/arduino-uno-open.png",
+      t: { ru: "Корпус для Arduino Uno R3", en: "Arduino Uno R3 enclosure" },
+      d: { ru: "Стойки под саморезы M3, вырезы под USB-B и разъём питания. Внутри учтён выступ USB-разъёма за край платы на 6,3 мм.", en: "M3 screw standoffs, USB-B and DC jack cutouts. Leaves room for the USB connector's 6.3 mm overhang." },
+      tags: ["Fusion 360", "STL", "STEP"] },
+    { cat: "cad", img: "images/render/esp32-devkitc-closed.png",
+      t: { ru: "Корпус для ESP32 DevKitC", en: "ESP32 DevKitC enclosure" },
+      d: { ru: "Плата лежит на полках по торцам и не задевает гребёнки. Крышка на защёлках прижимает её стойками, винты не нужны.", en: "The board rests on end ledges clear of the pin headers. The snap-fit lid holds it down, no screws." },
+      tags: ["Fusion 360", "Snap-fit", "FDM"] },
+    { cat: "cad", img: "images/render/blackpill-f411-exploded.png",
+      t: { ru: "Корпус для STM32 BlackPill", en: "STM32 BlackPill enclosure" },
+      d: { ru: "Компактный корпус 58,6 × 25,6 мм: вырез под USB-C, вентиляция над микроконтроллером, юбка крышки 1,2 мм под защёлку.", en: "Compact 58.6 × 25.6 mm case: USB-C cutout, vents over the MCU, 1.2 mm flexing lid lip." },
+      tags: ["Fusion 360", "STL", "STEP"] },
+    { cat: "cad", img: "images/render/arduino-nano-open.png",
+      t: { ru: "Корпус для Arduino Nano", en: "Arduino Nano enclosure" },
+      d: { ru: "Самый маленький корпус серии: 50,6 × 22,6 мм. Вырез под mini-USB, полки рассчитаны под шаг гребёнок 2,54 мм.", en: "The smallest in the series: 50.6 × 22.6 mm. Mini-USB cutout, ledges sized around the 2.54 mm headers." },
+      tags: ["Fusion 360", "STL", "FDM"] }
+  ],
+  services: [
+    { t: { ru: "3D-моделирование и CAD", en: "3D modeling & CAD" },
+      li: { ru: ["Детали и сборки под производство", "Модели под 3D-печать (FDM, SLA)", "Модель по фото, эскизу или замерам", "Чертежи по ГОСТ / ISO"],
+            en: ["Parts and assemblies for manufacturing", "Models for 3D printing (FDM, SLA)", "Models from photos, sketches or measurements", "Technical drawings (ISO)"] },
+      price: { ru: "от 1 500 ₽", en: "from $25" }, unit: { ru: "за деталь", en: "per part" } },
+    { t: { ru: "3D-визуализация", en: "3D visualization" },
+      li: { ru: ["Рендеры товаров для маркетплейсов", "Интерьеры и экстерьеры", "Анимация вращения 360°", "Инфографика на карточку"],
+            en: ["Product renders for e-commerce", "Interiors and exteriors", "360° turntable animation", "Listing infographics"] },
+      price: { ru: "от 2 500 ₽", en: "from $40" }, unit: { ru: "за ракурс", en: "per view" } },
+    { t: { ru: "Фотография", en: "Photography" },
+      li: { ru: ["Предметная съёмка на белом фоне", "Каталожная и лайфстайл-съёмка", "Ретушь и цветокоррекция", "Обтравка и подготовка под сайт"],
+            en: ["Packshots on white", "Catalog and lifestyle shots", "Retouching and color grading", "Clipping and web prep"] },
+      price: { ru: "от 400 ₽", en: "from $8" }, unit: { ru: "за кадр", en: "per shot" } }
+  ]
+};
+
+const T = {
+  ru: {
+    brand: "Портфолио · 3D · CAD · Фото", navWorks: "Работы", navServices: "Услуги", navProcess: "Как работаю", navContact: "Контакты",
+    status: "Принимаю заказы", role: "3D-моделирование, визуализация и фото",
+    lead: "Делаю 3D-модели, которые можно отправить на станок или принтер, рендеры, которые продают товар, и фотографии для каталогов. Отвечаю быстро, сроки соблюдаю, исходники отдаю.",
+    ctaOrder: "Обсудить задачу", ctaWorks: "Смотреть работы",
+    worksEyebrow: "Избранные проекты", worksTitle: "Работы",
+    all: "Все", cad: "CAD", viz: "Визуализация", photo: "Фото",
+    svcEyebrow: "Что я делаю", svcTitle: "Услуги и цены",
+    procEyebrow: "От ТЗ до файлов", procTitle: "Как я работаю",
+    steps: [
+      ["Задача", "Вы присылаете описание, фото, эскиз или чертёж. Задаю уточняющие вопросы."],
+      ["Оценка", "Называю точную цену и срок. Работаю через безопасную сделку площадки."],
+      ["Черновик", "Показываю промежуточный результат, чтобы мы не ушли в сторону."],
+      ["Правки", "Два круга правок входят в цену."],
+      ["Сдача", "Отдаю финальные файлы в нужных форматах и исходники."]
+    ],
+    fmtTitle: "Форматы, которые отдаю",
+    tools: "Инструменты: Fusion 360 · Blender · Photoshop · Lightroom",
+    guarTitle: "Что вы получаете",
+    guar: ["Точную цену и срок до начала работы", "Промежуточные результаты, без «чёрного ящика»", "Исходные файлы проекта", "NDA по запросу, работы не публикую без согласия"],
+    contactEyebrow: "Контакты", contactTitle: "Расскажите о задаче", contactText: "Пришлите фото, эскиз или ссылку на пример. Отвечу с оценкой цены и срока в течение часа в рабочее время.",
+    stDev: "Разраб.", stSheet: "Лист", stScale: "Масштаб", stYear: "Год",
+    noImg: "Добавь фото: ", copy: "копир.", copied: "готово"
+  },
+  en: {
+    brand: "Portfolio · 3D · CAD · Photo", navWorks: "Work", navServices: "Services", navProcess: "Process", navContact: "Contact",
+    status: "Available for work", role: "3D modeling, rendering and photography",
+    lead: "I build 3D models ready for CNC or 3D printing, renders that sell products, and photos for catalogs. Fast replies, deadlines kept, source files included.",
+    ctaOrder: "Discuss your project", ctaWorks: "See my work",
+    worksEyebrow: "Selected projects", worksTitle: "Work",
+    all: "All", cad: "CAD", viz: "Rendering", photo: "Photo",
+    svcEyebrow: "What I do", svcTitle: "Services and rates",
+    procEyebrow: "From brief to files", procTitle: "How I work",
+    steps: [
+      ["Brief", "You send a description, photos, a sketch or a drawing. I ask clarifying questions."],
+      ["Quote", "I give a fixed price and deadline. Payment goes through the platform's escrow."],
+      ["Draft", "I share work in progress so we stay on track."],
+      ["Revisions", "Two rounds of revisions are included."],
+      ["Delivery", "Final files in the formats you need, plus source files."]
+    ],
+    fmtTitle: "Delivery formats",
+    tools: "Tools: Fusion 360 · Blender · Photoshop · Lightroom",
+    guarTitle: "What you get",
+    guar: ["A fixed price and deadline before I start", "Progress updates, no black box", "Project source files", "NDA on request; nothing published without your consent"],
+    contactEyebrow: "Contact", contactTitle: "Tell me about your project", contactText: "Send photos, a sketch or a reference. I'll reply with a price and deadline within an hour during working hours.",
+    stDev: "Drawn by", stSheet: "Sheet", stScale: "Scale", stYear: "Year",
+    noImg: "Add image: ", copy: "copy", copied: "copied"
+  }
+};
+
+const FORMATS = [["STEP", "CAD"], ["STL", "3D print"], ["F3D", "Fusion"], ["DWG/PDF", "drawings"], ["PNG 4K", "renders"], ["TIFF/JPG", "photo"]];
+
+let lang = "ru", filter = "all";
+try { lang = localStorage.getItem("lang") || "ru" } catch (e) {}
+
+function media(el, src, alt) {
+  el.innerHTML = "";
+  const img = new Image();
+  img.alt = alt; img.loading = "lazy";
+  img.onerror = () => { el.innerHTML = `<div class="ph"><span>${T[lang].noImg}${src}</span></div>` };
+  img.src = src;
+  el.appendChild(img);
+}
+
+function render() {
+  const t = T[lang];
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-t]").forEach(n => n.textContent = t[n.dataset.t]);
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === lang));
+  document.getElementById("name").textContent = CONFIG.name[lang];
+  document.getElementById("stName").textContent = CONFIG.name[lang];
+  document.getElementById("stYear").textContent = new Date().getFullYear();
+  media(document.getElementById("photo"), CONFIG.photo, CONFIG.name[lang]);
+
+  document.getElementById("specs").innerHTML = CONFIG.specs.map(s =>
+    `<div><span class="label">${s.k[lang]}</span><b>${lang === "ru" ? s.v : s.ven}</b></div>`).join("");
+
+  // Show a filter only for categories that have work in them.
+  const cats = ["cad", "viz", "photo"].filter(c => CONFIG.works.some(w => w.cat === c));
+  if (filter !== "all" && !cats.includes(filter)) filter = "all";
+  document.getElementById("filters").innerHTML = (cats.length > 1 ? ["all", ...cats] : []).map(f =>
+    `<button id="f-${f}" type="button" data-f="${f}" aria-pressed="${f === filter}">${t[f]}</button>`).join("");
+
+  const grid = document.getElementById("worksGrid");
+  grid.innerHTML = "";
+  CONFIG.works.filter(w => filter === "all" || w.cat === filter).forEach(w => {
+    const a = document.createElement("article");
+    a.className = "work" + (w.wide && filter === "all" ? " wide" : "") + (w.tall ? " tall" : "") + (w.fit ? " fit" : "");
+    a.innerHTML = `<div class="media"></div>
+      <div class="meta"><h3>${w.t[lang]}</h3><span class="label">${t[w.cat]}</span></div>
+      <p>${w.d[lang]}</p><div class="tags">${w.tags.map(x => `<span>${x}</span>`).join("")}</div>` +
+      (w.file ? `<a class="file" href="${w.file.href}" target="_blank" rel="noopener">${w.file[lang]} ↗</a>` : "");
+    grid.appendChild(a);
+    media(a.querySelector(".media"), w.img, w.t[lang]);
+  });
+
+  document.getElementById("svcGrid").innerHTML = CONFIG.services.map(s =>
+    `<div class="svc"><h3>${s.t[lang]}</h3><ul>${s.li[lang].map(x => `<li>${x}</li>`).join("")}</ul>
+     <div class="price"><b>${s.price[lang]}</b><span class="label">${s.unit[lang]}</span></div></div>`).join("");
+
+  document.getElementById("steps").innerHTML = t.steps.map((s, i) =>
+    `<div class="step"><div class="n">${String(i + 1).padStart(2, "0")}</div><h3>${s[0]}</h3><p>${s[1]}</p></div>`).join("");
+
+  document.getElementById("formats").innerHTML = FORMATS.map(f => `<span>${f[0]}<small>${f[1]}</small></span>`).join("");
+  document.getElementById("guar").innerHTML = t.guar.map(g => `<li>${g}</li>`).join("");
+
+  document.getElementById("contacts").innerHTML = CONFIG.contacts.map((c, i) =>
+    `<div class="row"><span class="label">${c.label}</span><span>${c.url
+      ? `<a class="v" id="c${i}" href="${c.url}" target="_blank" rel="noopener">${c.value}</a>`
+      : `<span class="v" id="c${i}">${c.value}</span>`}<button class="copy" type="button" data-i="${i}">${t.copy}</button></span></div>`).join("");
+}
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("button");
+  if (!b) return;
+  if (b.dataset.lang) { lang = b.dataset.lang; try { localStorage.setItem("lang", lang) } catch (x) {} render() }
+  else if (b.dataset.f) { filter = b.dataset.f; render() }
+  else if (b.classList.contains("copy")) {
+    const el = document.getElementById("c" + b.dataset.i);
+    const done = () => { b.textContent = T[lang].copied; setTimeout(() => b.textContent = T[lang].copy, 1500) };
+    navigator.clipboard.writeText(el.textContent).then(done).catch(() => {
+      const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    });
+  }
+});
+
+render();
+</script>
