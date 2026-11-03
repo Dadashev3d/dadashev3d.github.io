@@ -124,8 +124,8 @@ section + section { border-top: 1px solid var(--line) }
 .svc ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; font-size: 15px }
 .svc li { padding-left: 18px; position: relative }
 .svc li::before { content: ""; position: absolute; left: 0; top: 0.75em; width: 9px; height: 1px; background: var(--accent) }
-.price { margin-top: auto; padding-top: 16px; border-top: 1px dashed var(--line); display: flex; justify-content: space-between; align-items: baseline; gap: 10px }
-.price b { font: 700 22px var(--display); font-variant-numeric: tabular-nums }
+.price { margin-top: auto; padding-top: 16px; border-top: 1px dashed var(--line); display: flex; flex-direction: column; gap: 6px }
+.price b { font: 700 24px var(--display); font-variant-numeric: tabular-nums; white-space: nowrap }
 
 /* process */
 .steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; counter-reset: s }
