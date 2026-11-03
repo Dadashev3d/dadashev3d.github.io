@@ -58,8 +58,8 @@ a { color: inherit }
 .hero { display: grid; grid-template-columns: 1.6fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: end }
 .hero > * { min-width: 0 }
 .hero > * { min-width: 0 }
-.hero h1 { font-size: clamp(28px, 3.9vw, 56px); line-height: 1.04; margin-top: 18px; hyphens: auto; overflow-wrap: break-word }
-.hero h1 .role { color: var(--accent) }
+.hero h1 { font-size: clamp(28px, 3.9vw, 56px); line-height: 1.04; margin-top: 18px; hyphens: manual }
+.hero h1 .role { color: var(--accent); display: inline-block; margin-top: 8px; font-size: 0.66em; line-height: 1.12 }
 .lead { font-size: clamp(17px, 1.6vw, 20px); color: var(--muted); max-width: 52ch; margin-top: 22px }
 .ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px }
 .btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 22px; font: 600 15px var(--body);
@@ -340,7 +340,7 @@ const CONFIG = {
 const T = {
   ru: {
     brand: "Портфолио · 3D · CAD · Фото", navWorks: "Работы", navServices: "Услуги", navProcess: "Как работаю", navContact: "Контакты",
-    status: "Принимаю заказы", role: "3D-моделиро­вание, визуали­зация и фото",
+    status: "Принимаю заказы", role: "3D-моделирование, визуализация и фото",
     lead: "Делаю 3D-модели, которые можно отправить на станок или принтер, рендеры, которые продают товар, и фотографии для каталогов. Отвечаю быстро, сроки соблюдаю, исходники отдаю.",
     ctaOrder: "Обсудить задачу", ctaWorks: "Смотреть работы",
     worksEyebrow: "Избранные проекты", worksTitle: "Работы",
