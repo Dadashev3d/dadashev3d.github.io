@@ -109,6 +109,14 @@ section + section { border-top: 1px solid var(--line) }
 .work.wide { grid-column: span 2 } .work.wide .media { aspect-ratio: 16/9 }
 .work.tall .media { aspect-ratio: 3/4 }
 .work.fit .media { background: #fff } .work.fit .media img { object-fit: contain }
+.ba { position: relative; overflow: hidden; user-select: none; touch-action: pan-y }
+.ba img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block }
+.ba .after { clip-path: inset(0 0 0 var(--x, 50%)) }
+.ba .bar { position: absolute; top: 0; bottom: 0; left: var(--x, 50%); width: 3px; margin-left: -1.5px; background: #fff; pointer-events: none }
+.ba .bar::after { content: "94"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 38px; height: 38px; border-radius: 50%; background: #fff; color: var(--accent); font: 700 18px/38px var(--body); text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,.25) }
+.ba .tag { position: absolute; top: 12px; font: 600 12px var(--body); letter-spacing: .04em; text-transform: uppercase; padding: 5px 10px; border-radius: 99px; background: var(--accent); color: #fff; pointer-events: none }
+.ba .tag.l { left: 12px } .ba .tag.r { right: 12px }
+.ba input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0 }
 .work .file { font: 500 13px var(--mono); color: var(--ink); text-underline-offset: 3px; align-self: start }
 .work .meta { display: flex; justify-content: space-between; gap: 12px }
 .work h3 { font-size: 17px; line-height: 1.3 }
@@ -327,6 +335,30 @@ const CONFIG = {
       t: { ru: "Набор косметики на подиуме", en: "Skincare set on a podium" },
       d: { ru: "Баночка крема из матового стекла с гравировкой на крышке, сыворотка в янтарном флаконе с пипеткой и туба. Пастельный подиум и фон под баннер или главный кадр карточки на Wildberries и Ozon.", en: "A frosted glass cream jar with an engraved lid, a serum in an amber dropper bottle and a tube. Pastel podium and backdrop for a banner or a marketplace main image." },
       tags: ["Render", "Косметика", "Wildberries"] },
+    { cat: "photo", wide: true, ba: ["images/photo/hiker-before.jpg", "images/photo/hiker-after.jpg"],
+      t: { ru: "Цветокоррекция: тревел", en: "Color grading: travel" },
+      d: { ru: "Кинематографичный тон в Lightroom: тёплый свет на человеке, бирюзовые тени, объёмное небо. Потяните шторку, чтобы сравнить. Исходник — фото Adobe Stock по лицензии.", en: "A cinematic Lightroom grade: warm light on the subject, teal shadows, a deeper sky. Drag the slider to compare. Source photo: Adobe Stock, licensed." },
+      tags: ["Lightroom", "Color grading", "Travel"] },
+    { cat: "photo", ba: ["images/photo/woman-before.jpg", "images/photo/woman-after.jpg"],
+      t: { ru: "Портрет: тёплый «золотой час»", en: "Portrait: golden-hour warmth" },
+      d: { ru: "Тёплый тон кожи, сочные осенние цвета фона, мягкий контраст. Только цвет и свет, внешность не меняю. Исходник — фото Adobe Stock по лицензии.", en: "Warm skin tones, rich autumn background, soft contrast. Color and light only, no reshaping. Source photo: Adobe Stock, licensed." },
+      tags: ["Lightroom", "Портрет"] },
+    { cat: "photo", ba: ["images/photo/camera-before.jpg", "images/photo/camera-after.jpg"],
+      t: { ru: "Товар на белый фон", en: "Product on white" },
+      d: { ru: "Вырезка в Photoshop по маске, чистый белый фон, мягкая контактная тень. Формат главного фото для Wildberries и Ozon, отдаю PSD со слоями. Исходник — фото Adobe Stock по лицензии.", en: "Masked cutout in Photoshop, pure white background, a soft contact shadow. Marketplace main-image format, layered PSD included. Source photo: Adobe Stock, licensed." },
+      tags: ["Photoshop", "Белый фон", "PSD"] },
+    { cat: "photo", ba: ["images/photo/headphones-before.jpg", "images/photo/headphones-after.jpg"],
+      t: { ru: "Замена фона для баннера", en: "Background swap for a banner" },
+      d: { ru: "Наушники отделены от стола и жёсткой тени, перенесены на цветной фон, тень построена заново по форме товара. Исходник — фото Adobe Stock по лицензии.", en: "Headphones separated from the desk and its hard shadow, placed on a brand color, with a new shadow built from the product shape. Source photo: Adobe Stock, licensed." },
+      tags: ["Photoshop", "Маска", "Баннер"] },
+    { cat: "photo", ba: ["images/photo/man-before.jpg", "images/photo/man-after.jpg"],
+      t: { ru: "Портрет на улице: кино-тон", en: "Street portrait: film look" },
+      d: { ru: "Холодные бирюзовые тени, приглушённые красные стены, акцент на лице. Стиль под ленту бренда или личный блог. Исходник — фото Adobe Stock по лицензии.", en: "Cool teal shadows, muted red walls, focus on the face. A look for a brand feed or a personal blog. Source photo: Adobe Stock, licensed." },
+      tags: ["Lightroom", "Cinematic"] },
+    { cat: "photo", ba: ["images/photo/lake-before.jpg", "images/photo/lake-after.jpg"],
+      t: { ru: "Пейзаж: убрать бирюзовый оттенок", en: "Landscape: removing a teal cast" },
+      d: { ru: "Снят зелёно-бирюзовый налёт, возвращены тёплые осенние цвета листвы, вытянуты тени, сохранено отражение гор в воде. Исходник — фото Adobe Stock по лицензии.", en: "Removed the green-teal cast, brought back warm autumn foliage, opened the shadows, kept the mountain reflection intact. Source photo: Adobe Stock, licensed." },
+      tags: ["Lightroom", "Пейзаж"] },
     { cat: "cad", wide: true, img: "images/render/print-plate.png",
       t: { ru: "Модели под 3D-печать", en: "Models for 3D printing" },
       d: { ru: "Три типичных заказа на одном столе принтера. Значок 2.5D по картинке в четыре цвета для печати с AMS. Брелок с выпуклой надписью и отверстием под кольцо. Подставка для телефона с бортиком, прорезью под кабель и окном для экономии пластика. Все детали без поддержек, STL готовы к слайсеру.", en: "Three typical orders on one build plate. A four-color 2.5D badge from a picture for AMS printing. A keychain with raised lettering and a ring hole. A phone stand with a lip, a cable slot and a window to save filament. No supports needed; STLs ready for the slicer." },
@@ -389,7 +421,7 @@ const T = {
     lead: "Делаю 3D-модели, которые можно отправить на станок или принтер, рендеры, которые продают товар, и фотографии для каталогов. Отвечаю быстро, сроки соблюдаю, исходники отдаю.",
     ctaOrder: "Обсудить задачу", ctaWorks: "Смотреть работы",
     worksEyebrow: "Избранные проекты", worksTitle: "Работы",
-    all: "Все", cad: "CAD", viz: "Визуализация", photo: "Фото",
+    all: "Все", cad: "CAD", viz: "Визуализация", photo: "Фото", before: "До", after: "После",
     svcEyebrow: "Что я делаю", svcTitle: "Услуги и цены",
     procEyebrow: "От ТЗ до файлов", procTitle: "Как я работаю",
     steps: [
@@ -413,7 +445,7 @@ const T = {
     lead: "I build 3D models ready for CNC or 3D printing, renders that sell products, and photos for catalogs. Fast replies, deadlines kept, source files included.",
     ctaOrder: "Discuss your project", ctaWorks: "See my work",
     worksEyebrow: "Selected projects", worksTitle: "Work",
-    all: "All", cad: "CAD", viz: "Rendering", photo: "Photo",
+    all: "All", cad: "CAD", viz: "Rendering", photo: "Photo", before: "Before", after: "After",
     svcEyebrow: "What I do", svcTitle: "Services and rates",
     procEyebrow: "From brief to files", procTitle: "How I work",
     steps: [
@@ -445,6 +477,15 @@ function media(el, src, alt) {
   img.onerror = () => { el.innerHTML = `<div class="ph"><span>${T[lang].noImg}${src}</span></div>` };
   img.src = src;
   el.appendChild(img);
+}
+
+function beforeAfter(el, w) {
+  el.classList.add("ba");
+  el.innerHTML = `<img src="${w.ba[0]}" alt="${T[lang].before}: ${w.t[lang]}" loading="lazy">` +
+    `<img class="after" src="${w.ba[1]}" alt="${T[lang].after}: ${w.t[lang]}" loading="lazy">` +
+    `<span class="bar"></span><span class="tag l">${T[lang].before}</span><span class="tag r">${T[lang].after}</span>` +
+    `<input type="range" min="0" max="100" value="50" aria-label="${T[lang].before} / ${T[lang].after}">`;
+  el.querySelector("input").addEventListener("input", e => el.style.setProperty("--x", e.target.value + "%"));
 }
 
 function render() {
@@ -479,7 +520,7 @@ function render() {
       <p>${w.d[lang]}</p><div class="tags">${w.tags.map(x => `<span>${x}</span>`).join("")}</div>` +
       (w.file ? `<a class="file" href="${w.file.href}" target="_blank" rel="noopener">${w.file[lang]} ↗</a>` : "");
     grid.appendChild(a);
-    media(a.querySelector(".media"), w.img, w.t[lang]);
+    if (w.ba) beforeAfter(a.querySelector(".media"), w); else media(a.querySelector(".media"), w.img, w.t[lang]);
   });
 
   document.getElementById("svcGrid").innerHTML = CONFIG.services.map(s =>
