@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bright Harbor Dental — AI Front Desk Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14232b; --muted:#5b6b73; --line:#e3e9ec; --bg:#f7faf9; --card:#ffffff;
+    --teal:#0f766e; --teal-2:#14b8a6; --teal-soft:#e6f4f2; --sand:#fbf6ee; --accent:#f59e0b;
+    --radius:16px; --shadow:0 10px 30px rgba(20,35,43,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55}
+  a{color:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+  /* demo ribbon */
+  .ribbon{background:var(--ink);color:#d9e4e8;font-size:13.5px;padding:9px 0}
+  .ribbon .wrap{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .ribbon b{color:#fff}
+  .ribbon .tag{background:var(--accent);color:#1b1300;font-weight:600;border-radius:999px;padding:2px 9px;font-size:12px;margin-right:8px}
+  .ribbon button{background:transparent;border:1px solid #4b5d66;color:#fff;border-radius:999px;padding:5px 12px;font:inherit;font-size:13px;cursor:pointer}
+  .ribbon button:hover{border-color:#fff}
+
+  header.site{background:#fff;border-bottom:1px solid var(--line)}
+  header.site .wrap{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:Fraunces,serif;font-size:22px;font-weight:600}
+  .logo svg{width:32px;height:32px}
+  nav a{margin-left:26px;text-decoration:none;color:var(--muted);font-size:15px}
+  nav a:hover{color:var(--ink)}
+  .phone-top{font-weight:600;color:var(--teal);text-decoration:none}
+
+  .hero{padding:72px 0 60px;background:linear-gradient(180deg,#fff, var(--bg))}
+  .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+  .eyebrow{color:var(--teal);font-weight:600;font-size:14px;letter-spacing:.04em;text-transform:uppercase}
+  h1{font-family:Fraunces,serif;font-weight:600;font-size:52px;line-height:1.08;margin:14px 0 18px}
+  .lead{font-size:18px;color:var(--muted);max-width:520px}
+  .cta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+  .btn{border:0;border-radius:999px;padding:14px 24px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
+  .btn.primary{background:var(--teal);color:#fff}
+  .btn.primary:hover{background:#0b5f58}
+  .btn.ghost{background:#fff;border:1px solid var(--line)}
+  .hero-card{background:var(--card);border-radius:24px;box-shadow:var(--shadow);padding:28px;border:1px solid var(--line)}
+  .hero-card h3{font-family:Fraunces,serif;font-size:20px;margin-bottom:14px}
+  .hours div{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed var(--line);font-size:15px}
+  .hours div:last-child{border:0}
+  .hours span:last-child{color:var(--muted)}
+  .badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+  .badge{background:var(--teal-soft);color:var(--teal);font-size:13px;padding:5px 10px;border-radius:999px;font-weight:500}
+
+  section{padding:64px 0}
+  h2{font-family:Fraunces,serif;font-weight:600;font-size:34px;margin-bottom:10px}
+  .sub{color:var(--muted);margin-bottom:32px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .svc{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+  .svc .ic{width:42px;height:42px;border-radius:12px;background:var(--teal-soft);display:grid;place-items:center;margin-bottom:14px;font-size:20px}
+  .svc h4{font-size:17px;margin-bottom:6px}
+  .svc p{color:var(--muted);font-size:15px}
+
+  /* how it works / owner section */
+  .owner{background:var(--sand);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .owner .wrap{display:grid;grid-template-columns:1fr 360px;gap:48px;align-items:center}
+  .steps{list-style:none;margin-top:20px}
+  .steps li{display:flex;gap:14px;margin-bottom:18px}
+  .steps .n{flex:0 0 32px;height:32px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-weight:600}
+  .steps b{display:block}
+  .steps span{color:var(--muted);font-size:15px}
+  .stat{display:flex;gap:28px;margin-top:10px;flex-wrap:wrap}
+  .stat div{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 18px}
+  .stat strong{font-family:Fraunces,serif;font-size:28px;display:block;color:var(--teal)}
+  .stat small{color:var(--muted)}
+
+  /* phone mockup */
+  .phone{width:340px;height:640px;border-radius:44px;background:#0d1417;padding:12px;box-shadow:0 30px 60px rgba(0,0,0,.25);margin:0 auto}
+  .screen{width:100%;height:100%;border-radius:34px;background:linear-gradient(160deg,#1d3b46,#0f2229);overflow:hidden;position:relative;color:#fff}
+  .notch{width:120px;height:28px;background:#0d1417;border-radius:0 0 18px 18px;margin:0 auto}
+  .clock{text-align:center;font-size:58px;font-weight:300;margin-top:30px;letter-spacing:-1px}
+  .date{text-align:center;opacity:.75;font-size:15px}
+  .notifs{position:absolute;left:12px;right:12px;top:190px;display:flex;flex-direction:column;gap:10px}
+  .notif{background:rgba(255,255,255,.92);color:#0d1417;border-radius:18px;padding:12px 14px;font-size:13.5px;transform:translateY(-12px);opacity:0;transition:all .45s ease}
+  .notif.show{transform:none;opacity:1}
+  .notif .top{display:flex;align-items:center;gap:8px;font-size:12px;color:#5b6b73;margin-bottom:4px}
+  .notif .app{width:20px;height:20px;border-radius:6px;display:grid;place-items:center;color:#fff;font-size:11px;font-weight:700}
+  .notif .t{font-weight:600;margin-bottom:2px}
+  .notif .row{display:flex;gap:6px}
+  .notif .row span:first-child{color:#5b6b73;min-width:62px}
+  .phone-empty{position:absolute;top:240px;left:0;right:0;text-align:center;opacity:.6;font-size:14px;padding:0 30px}
+  .phone-actions{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+
+  footer{padding:40px 0;color:var(--muted);font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+  /* chat widget */
+  .launcher{position:fixed;right:24px;bottom:24px;width:64px;height:64px;border-radius:50%;background:var(--teal);color:#fff;border:0;cursor:pointer;box-shadow:0 12px 28px rgba(15,118,110,.4);display:grid;place-items:center;z-index:50}
+  .launcher svg{width:28px;height:28px}
+  .launcher .dot{position:absolute;top:4px;right:4px;width:16px;height:16px;border-radius:50%;background:var(--accent);border:2px solid #fff}
+  .bubble-hint{position:fixed;right:98px;bottom:36px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 14px;box-shadow:var(--shadow);font-size:14px;z-index:50;max-width:240px;cursor:pointer}
+  .chat{position:fixed;right:24px;bottom:100px;width:370px;max-width:calc(100vw - 32px);height:560px;max-height:calc(100vh - 130px);background:#fff;border-radius:22px;box-shadow:0 24px 60px rgba(20,35,43,.22);display:none;flex-direction:column;overflow:hidden;z-index:60;border:1px solid var(--line)}
+  .chat.open{display:flex}
+  .chat-head{background:var(--teal);color:#fff;padding:16px 18px;display:flex;align-items:center;gap:12px}
+  .avatar{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:18px}
+  .chat-head b{display:block;font-size:15px}
+  .chat-head small{opacity:.85;font-size:12.5px}
+  .chat-head .online{display:inline-block;width:8px;height:8px;background:#4ade80;border-radius:50%;margin-right:5px}
+  .chat-head button{margin-left:auto;background:transparent;border:0;color:#fff;font-size:22px;cursor:pointer;line-height:1}
+  .msgs{flex:1;overflow-y:auto;padding:16px;background:#f8fbfa;display:flex;flex-direction:column;gap:10px}
+  .m{max-width:84%;padding:10px 13px;border-radius:16px;font-size:14.5px;white-space:pre-line}
+  .m.bot{background:#fff;border:1px solid var(--line);border-bottom-left-radius:4px;align-self:flex-start}
+  .m.me{background:var(--teal);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+  .m.sys{align-self:center;background:var(--teal-soft);color:var(--teal);font-size:12.5px;border-radius:999px;padding:5px 12px}
+  .typing{display:flex;gap:4px;padding:12px 14px}
+  .typing i{width:7px;height:7px;border-radius:50%;background:#9fb1b8;animation:b 1s infinite}
+  .typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+  @keyframes b{0%,60%,100%{transform:none;opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;background:#f8fbfa}
+  .chip{border:1px solid var(--teal);color:var(--teal);background:#fff;border-radius:999px;padding:6px 11px;font:inherit;font-size:13px;cursor:pointer}
+  .chip:hover{background:var(--teal-soft)}
+  .chat-input{display:flex;gap:8px;padding:12px;border-top:1px solid var(--line);background:#fff}
+  .chat-input input{flex:1;border:1px solid var(--line);border-radius:999px;padding:11px 14px;font:inherit;font-size:14.5px;outline:none}
+  .chat-input input:focus{border-color:var(--teal)}
+  .chat-input button{border:0;background:var(--teal);color:#fff;border-radius:50%;width:42px;height:42px;cursor:pointer;font-size:17px}
+  .powered{text-align:center;font-size:11.5px;color:var(--muted);padding:0 0 8px;background:#fff}
+
+  /* modal */
+  .modal-bg{position:fixed;inset:0;background:rgba(13,20,23,.55);display:none;align-items:center;justify-content:center;z-index:80;padding:20px}
+  .modal-bg.open{display:flex}
+  .modal{background:#fff;border-radius:20px;max-width:520px;padding:28px;position:relative}
+  .modal h3{font-family:Fraunces,serif;font-size:24px;margin-bottom:10px}
+  .modal p{color:var(--muted);margin-bottom:10px}
+  .modal ul{margin:6px 0 14px 18px;color:var(--ink)}
+  .modal li{margin-bottom:6px}
+  .modal .x{position:absolute;top:14px;right:16px;border:0;background:none;font-size:24px;cursor:pointer;color:var(--muted)}
+  .contact{background:var(--teal-soft);border-radius:12px;padding:12px 14px;font-size:14.5px}
+
+  @media (max-width:900px){
+    .hero .wrap,.owner .wrap{grid-template-columns:1fr}
+    .grid3{grid-template-columns:1fr}
+    h1{font-size:40px}
+    nav{display:none}
+    .bubble-hint{display:none}
+  }
+</style>
+</head>
+<body>
+
+<div class="ribbon">
+  <div class="wrap">
+    <div><span class="tag">DEMO</span><b>Bright Harbor Dental</b> is a sample clinic. Try the chat in the corner — then see what the clinic owner receives.</div>
+    <button id="aboutBtn">Want this on your site?</button>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <div class="logo">
+      <svg viewBox="0 0 32 32" fill="none"><path d="M9 5c-3 0-5 2.6-5 6.4 0 3.6 1.5 6 2.6 9.4C7.6 24 8 27 10 27c2.4 0 2.2-6.3 6-6.3s3.6 6.3 6 6.3c2 0 2.4-3 3.4-6.2 1.1-3.4 2.6-5.8 2.6-9.4C28 7.6 26 5 23 5c-2.8 0-4 1.6-7 1.6S11.8 5 9 5z" fill="#0f766e"/></svg>
+      Bright Harbor Dental
+    </div>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#how">For clinic owners</a>
+      <a class="phone-top" href="#" onclick="return false">(555) 014-2290</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Family &amp; cosmetic dentistry</div>
+      <h1>Gentle dental care for the whole family.</h1>
+      <p class="lead">Cleanings, whitening, implants and same-day emergency visits. New patients welcome — most insurance accepted.</p>
+      <div class="cta">
+        <button class="btn primary" data-open-chat="book">Book an appointment</button>
+        <button class="btn ghost" data-open-chat="question">Ask a question</button>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>Office hours</h3>
+      <div class="hours">
+        <div><span>Mon – Thu</span><span>8:00 am – 6:00 pm</span></div>
+        <div><span>Friday</span><span>8:00 am – 3:00 pm</span></div>
+        <div><span>Saturday</span><span>9:00 am – 1:00 pm</span></div>
+        <div><span>Sunday</span><span>Closed</span></div>
+      </div>
+      <div class="badge-row">
+        <span class="badge">New patients welcome</span>
+        <span class="badge">Same-day emergencies</span>
+        <span class="badge">Free parking</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <h2>Our services</h2>
+    <p class="sub">Everything your family needs, under one roof.</p>
+    <div class="grid3">
+      <div class="svc"><div class="ic">🪥</div><h4>Cleanings &amp; check-ups</h4><p>Exam, X-rays and professional cleaning. Recommended every 6 months.</p></div>
+      <div class="svc"><div class="ic">✨</div><h4>Teeth whitening</h4><p>In-office whitening in about an hour, or take-home trays.</p></div>
+      <div class="svc"><div class="ic">🦷</div><h4>Dental implants</h4><p>Permanent replacement for missing teeth. Free consultation.</p></div>
+      <div class="svc"><div class="ic">😁</div><h4>Clear aligners</h4><p>Straighter teeth without metal braces.</p></div>
+      <div class="svc"><div class="ic">🧸</div><h4>Kids' dentistry</h4><p>Friendly first visits for children from age 2.</p></div>
+      <div class="svc"><div class="ic">🚑</div><h4>Emergency care</h4><p>Toothache, broken tooth or swelling? We keep same-day slots open.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="owner" id="how">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">For the clinic owner</div>
+      <h2>Never lose a patient to a missed call again.</h2>
+      <p class="sub" style="margin-bottom:8px">Most people who can't reach the front desk don't leave a voicemail — they call the next clinic. This assistant answers your website visitors 24/7 and sends every new request straight to your phone.</p>
+      <ul class="steps">
+        <li><div class="n">1</div><div><b>Answers questions instantly</b><span>Hours, insurance, prices, services, directions — trained on your clinic's info.</span></div></li>
+        <li><div class="n">2</div><div><b>Books the request</b><span>Collects name, phone, service and preferred time — even at 11 pm on a Sunday.</span></div></li>
+        <li><div class="n">3</div><div><b>Notifies you in seconds</b><span>Telegram, WhatsApp, SMS or email — whatever your front desk already uses.</span></div></li>
+        <li><div class="n">4</div><div><b>Texts back missed calls</b><span>Optional: an automatic "Sorry we missed you" text with a booking link.</span></div></li>
+      </ul>
+    </div>
+    <div>
+      <div class="phone">
+        <div class="screen">
+          <div class="notch"></div>
+          <div class="clock" id="clock">9:41</div>
+          <div class="date" id="date">Thursday</div>
+          <div class="phone-empty" id="phoneEmpty">Book an appointment in the chat — the request will appear here, on the owner's phone.</div>
+          <div class="notifs" id="notifs"></div>
+        </div>
+      </div>
+      <div class="phone-actions">
+        <button class="btn primary" data-open-chat="book">Try booking</button>
+        <button class="btn ghost" id="missedBtn">Simulate a missed call</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Bright Harbor Dental is a fictional clinic created for demonstration.</div>
+    <div>Demo built by Ruslan Dadashev · dadashev3d.github.io</div>
+  </div>
+</footer>
+
+<!-- chat -->
+<div class="bubble-hint" id="hint">👋 Hi! Have a question or want to book? I'm here 24/7.</div>
+<button class="launcher" id="launcher" aria-label="Open chat">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>
+  <span class="dot"></span>
+</button>
+<div class="chat" id="chat" role="dialog" aria-label="Chat with Bright Harbor Dental">
+  <div class="chat-head">
+    <div class="avatar">🦷</div>
+    <div><b>Bright Harbor Assistant</b><small><span class="online"></span>Online · replies instantly</small></div>
+    <button id="closeChat" aria-label="Close">×</button>
+  </div>
+  <div class="msgs" id="msgs"></div>
+  <div class="chips" id="chips"></div>
+  <form class="chat-input" id="form">
+    <input id="input" autocomplete="off" placeholder="Type your message…">
+    <button type="submit" aria-label="Send">➤</button>
+  </form>
+  <div class="powered">AI front desk demo</div>
+</div>
+
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <button class="x" id="closeModal">×</button>
+    <h3>Get this on your clinic's website</h3>
+    <p>I set up the same assistant on your existing site, trained on your services, hours and insurance list:</p>
+    <ul>
+      <li>24/7 chat that answers patients and collects appointment requests</li>
+      <li>Instant notification to your phone (Telegram, WhatsApp, SMS or email)</li>
+      <li>Optional missed-call text-back</li>
+      <li>No need to change your website or phone number</li>
+    </ul>
+    <div class="contact">Ruslan Dadashev — ruslancsc93@gmail.com<br>Portfolio: dadashev3d.github.io</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $ = s => document.querySelector(s);
+  const msgs = $('#msgs'), chips = $('#chips'), input = $('#input');
+  const chat = $('#chat'), hint = $('#hint');
+  let started = false;
+  let flow = null;          // booking state
+  let lead = {};
+
+  // ---------- clinic knowledge ----------
+  const KB = [
+    {k:['hour','open','close','closing','when are you','saturday','sunday','weekend','time do you'],
+     a:"We're open:\nMon–Thu 8 am – 6 pm\nFri 8 am – 3 pm\nSat 9 am – 1 pm\nSunday closed.\n\nWant me to request an appointment for you?", chips:['Book an appointment','Do you take my insurance?']},
+    {k:['insurance','delta','cigna','aetna','metlife','guardian','ppo','medicaid','coverage','covered'],
+     a:"We accept most PPO plans, including Delta Dental, Cigna, Aetna, MetLife and Guardian. No insurance? We have a membership plan with 20% off treatments.\n\nIf you tell me your plan when booking, our team will check your benefits before the visit.", chips:['Book an appointment','How much is a cleaning?']},
+    {k:['price','cost','how much','expensive','fee','pay','payment','financing','afford'],
+     a:"Typical prices without insurance:\n• New patient exam + X-rays + cleaning: $189\n• In-office whitening: $399\n• Implant consultation: free\n\nWe also offer 0% financing for larger treatments.", chips:['Book an appointment','Do you take my insurance?']},
+    {k:['emergency','pain','hurt','toothache','broken','broke','chipped','swelling','swollen','bleeding','knocked'],
+     a:"I'm sorry you're dealing with that. We keep same-day emergency slots open.\n\nIf you have severe swelling, trouble breathing or uncontrolled bleeding, please go to the ER or call 911.\n\nOtherwise, I can send an urgent request to our team right now — they'll call you back within minutes during office hours.", chips:['Urgent request','Book an appointment'], urgent:true},
+    {k:['where','address','location','located','directions','parking','park'],
+     a:"We're at 120 Harbor Street, Suite 2 (demo address). Free parking right behind the building, and we're wheelchair accessible.", chips:['Office hours','Book an appointment']},
+    {k:['whiten','whitening','white teeth','bleach'],
+     a:"In-office whitening takes about an hour and brightens teeth several shades. We also offer take-home trays. In-office is $399.", chips:['Book whitening','How much is a cleaning?']},
+    {k:['implant','missing tooth','missing teeth','denture'],
+     a:"Implants are a permanent replacement for missing teeth. The first consultation, including a 3D scan, is free, and 0% financing is available.", chips:['Book implant consultation','Do you take my insurance?']},
+    {k:['aligner','invisalign','braces','straight','crooked'],
+     a:"We offer clear aligners for teens and adults. A free smile consultation tells you if you're a candidate and how long treatment would take.", chips:['Book a consultation','How much does it cost?']},
+    {k:['kid','child','children','son','daughter','baby','toddler'],
+     a:"Yes! We see kids from age 2. First visits are short and fun, so they get comfortable with the dentist.", chips:['Book for my child','Office hours']},
+    {k:['new patient','first visit','first time','accepting'],
+     a:"Yes, we're accepting new patients! Your first visit includes an exam, X-rays and a cleaning, and takes about an hour.", chips:['Book an appointment','Do you take my insurance?']},
+    {k:['clean','cleaning','check up','checkup','check-up','exam'],
+     a:"A cleaning and check-up takes about an hour. Most insurance plans cover it 100% twice a year. Without insurance it's $189 for new patients, including X-rays.", chips:['Book a cleaning','Do you take my insurance?']},
+    {k:['thank','thanks','great','awesome','perfect'],
+     a:"You're welcome! Anything else I can help with?", chips:['Book an appointment','Office hours']},
+    {k:['hi','hello','hey','good morning','good evening'],
+     a:"Hi there! How can I help you today?", chips:['Book an appointment','Office hours','Do you take my insurance?']},
+  ];
+
+  const SERVICE_CHIPS = ['Cleaning / check-up','Toothache / emergency','Whitening','Implant consultation','Clear aligners','Something else'];
+  const TIME_CHIPS = ['As soon as possible','Weekday morning','Weekday afternoon','Saturday'];
+
+  // ---------- UI helpers ----------
+  function add(text, who){
+    const d = document.createElement('div');
+    d.className = 'm ' + who;
+    d.textContent = text;
+    msgs.appendChild(d);
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+  function setChips(list){
+    chips.innerHTML = '';
+    (list||[]).forEach(t => {
+      const b = document.createElement('button');
+      b.type='button'; b.className='chip'; b.textContent=t;
+      b.onclick = () => userSays(t);
+      chips.appendChild(b);
+    });
+  }
+  function bot(text, chipList, delay){
+    setChips([]);
+    const t = document.createElement('div');
+    t.className='m bot typing'; t.innerHTML='<i></i><i></i><i></i>';
+    msgs.appendChild(t); msgs.scrollTop = msgs.scrollHeight;
+    const ms = delay ?? Math.min(1400, 450 + text.length*6);
+    return new Promise(res => setTimeout(() => { t.remove(); add(text,'bot'); setChips(chipList); res(); }, ms));
+  }
+
+  function openChat(mode){
+    chat.classList.add('open'); hint.style.display='none';
+    const dot = document.querySelector('.launcher .dot'); if (dot) dot.remove();
+    if (!started){
+      started = true;
+      if (mode === 'book'){ startBooking(); }
+      else bot("Hi! 👋 I'm the Bright Harbor virtual assistant. I can answer questions about our services, hours and insurance, or request an appointment for you.\n\nWhat can I help with?", ['Book an appointment','Office hours','Do you take my insurance?','I have a toothache'], 600);
+    } else if (mode === 'book' && !flow){ startBooking(); }
+    setTimeout(()=>input.focus(), 200);
+  }
+
+  // ---------- booking flow ----------
+  function startBooking(service, urgent){
+    flow = 'service'; lead = {urgent: !!urgent};
+    if (service){ lead.service = service; flow='time';
+      return bot("Great — when would you like to come in?", TIME_CHIPS); }
+    bot("Happy to help you book! What is the visit for?", SERVICE_CHIPS);
+  }
+
+  const validPhone = s => (s.replace(/\D/g,'').length >= 10);
+
+  function handleFlow(text){
+    switch(flow){
+      case 'service':
+        lead.service = text; flow='time';
+        if (/tooth ?ache|emergency|pain/i.test(text)) lead.urgent = true;
+        return bot(lead.urgent ? "Got it, I'll mark this as urgent. When can you come in?" : "Great choice. When would you like to come in?", lead.urgent ? ['As soon as possible','Today after work','Tomorrow morning'] : TIME_CHIPS);
+      case 'time':
+        lead.time = text; flow='name';
+        return bot("Perfect. What's your full name?");
+      case 'name':
+        if (text.trim().length < 2) return bot("Could you type your name, please?");
+        lead.name = text.trim(); flow='phone';
+        return bot(`Thanks, ${lead.name.split(' ')[0]}! What's the best phone number to reach you?`);
+      case 'phone':
+        if (!validPhone(text)) return bot("Hmm, that doesn't look like a full phone number. Could you include the area code? (e.g. 555-123-4567)");
+        lead.phone = text.trim(); flow='patient';
+        return bot("Are you a new or returning patient?", ['New patient','Returning patient']);
+      case 'patient':
+        lead.patient = text; flow='insurance';
+        return bot("Last question: do you have dental insurance? (Type the plan name, or tap below.)", ['No insurance','Delta Dental','Cigna','Other / not sure']);
+      case 'insurance':
+        lead.insurance = text; flow=null;
+        return finishBooking();
+    }
+  }
+
+  async function finishBooking(){
+    await bot(`All set! ✅ Here's your request:\n\n• ${lead.service}\n• ${lead.time}\n• ${lead.name}, ${lead.phone}\n• ${lead.patient}, insurance: ${lead.insurance}\n\nOur front desk ${lead.urgent ? 'will call you back within minutes during office hours' : 'will call you shortly to confirm the exact time'}.`, ['Office hours','Where are you located?']);
+    add('📲 Request sent to the clinic owner\'s phone','sys');
+    pushOwnerLead(lead);
+    setTimeout(()=>{
+      bot("(Demo note: scroll to “For the clinic owner” to see the notification the clinic just received.)", ['Show me', 'Ask another question'], 900);
+    }, 1200);
+  }
+
+  // ---------- intent matching ----------
+  function answer(text){
+    const t = text.toLowerCase();
+    if (/^show me$/.test(t)){ document.getElementById('how').scrollIntoView({behavior:'smooth'}); return bot("Here it is — look at the phone on the right. 👉", ['Ask another question']); }
+    if (/ask another question/.test(t)) return bot("Sure — what would you like to know?", ['Office hours','Do you take my insurance?','How much is a cleaning?']);
+    if (/urgent request/.test(t)) return startBooking('Toothache / emergency', true);
+    if (/book whitening/.test(t)) return startBooking('Whitening');
+    if (/book implant/.test(t)) return startBooking('Implant consultation');
+    if (/book a cleaning/.test(t)) return startBooking('Cleaning / check-up');
+    if (/book for my child/.test(t)) return startBooking("Kids' check-up");
+    if (/book a consultation/.test(t)) return startBooking('Clear aligners consultation');
+    if (/\b(book|appointment|schedule|reserve|come in|visit)\b/.test(t)) return startBooking();
+    if (/i have a toothache/.test(t)) { const e = KB.find(x=>x.urgent); return bot(e.a, e.chips); }
+
+    let best=null, score=0;
+    for (const e of KB){
+      let s=0; for (const k of e.k){ if (t.includes(k)) s += k.length; }
+      if (s>score){ score=s; best=e; }
+    }
+    if (best) return bot(best.a, best.chips);
+    return bot("Good question — I'm not 100% sure about that one, and I don't want to guess. I can pass it to our team and they'll get back to you. Would you like that, or would you prefer to book a visit?", ['Pass it to the team','Book an appointment']);
+  }
+
+  async function userSays(text){
+    if (!text.trim()) return;
+    add(text,'me'); setChips([]);
+    if (/pass it to the team/i.test(text)){
+      flow='q_name'; return bot("Sure. What's your name?");
+    }
+    if (flow === 'q_name'){ lead={name:text.trim(), service:'Question for the team', time:'—'}; flow='q_phone'; return bot("And a phone number or email where we can reply?"); }
+    if (flow === 'q_phone'){ lead.phone=text.trim(); flow=null; lead.patient='—'; lead.insurance='—';
+      await bot("Thanks! I've sent your question to the team — they'll reply soon.", ['Book an appointment','Office hours']);
+      add('📲 Question sent to the clinic owner\'s phone','sys'); pushOwnerLead(lead, true); return; }
+    if (flow) return handleFlow(text);
+    return answer(text);
+  }
+
+  $('#form').addEventListener('submit', e => { e.preventDefault(); const v=input.value; input.value=''; userSays(v); });
+  $('#launcher').onclick = () => chat.classList.contains('open') ? chat.classList.remove('open') : openChat();
+  hint.onclick = () => openChat();
+  $('#closeChat').onclick = () => chat.classList.remove('open');
+  document.querySelectorAll('[data-open-chat]').forEach(b => b.onclick = () => openChat(b.dataset.openChat));
+
+  // ---------- owner phone ----------
+  const notifs = $('#notifs');
+  function now(){ return new Date().toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}); }
+  function tick(){ const d=new Date(); $('#clock').textContent = d.toLocaleTimeString([], {hour:'numeric', minute:'2-digit'}).replace(/\s?[AP]M/i,''); $('#date').textContent = d.toLocaleDateString([], {weekday:'long', month:'long', day:'numeric'}); }
+  tick(); setInterval(tick, 30000);
+
+  function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+  function pushNotif(html){
+    $('#phoneEmpty').style.display='none';
+    const n = document.createElement('div'); n.className='notif'; n.innerHTML = html;
+    notifs.prepend(n);
+    while (notifs.children.length > 3) notifs.lastChild.remove();
+    requestAnimationFrame(()=>requestAnimationFrame(()=>n.classList.add('show')));
+  }
+  function pushOwnerLead(l, isQuestion){
+    pushNotif(`<div class="top"><span class="app" style="background:#229ED9">✈</span>Telegram · Clinic Leads Bot<span style="margin-left:auto">${now()}</span></div>
+      <div class="t">${l.urgent ? '🚨 URGENT — ' : '🆕 '}${isQuestion ? 'New question from website' : 'New appointment request'}</div>
+      <div class="row"><span>Patient</span><span>${esc(l.name)}</span></div>
+      <div class="row"><span>Phone</span><span>${esc(l.phone)}</span></div>
+      <div class="row"><span>Service</span><span>${esc(l.service)}</span></div>
+      ${isQuestion ? '' : `<div class="row"><span>When</span><span>${esc(l.time)}</span></div>
+      <div class="row"><span>Patient</span><span>${esc(l.patient)} · ${esc(l.insurance)}</span></div>`}`);
+  }
+
+  $('#missedBtn').onclick = () => {
+    pushNotif(`<div class="top"><span class="app" style="background:#ef4444">☎</span>Phone<span style="margin-left:auto">${now()}</span></div>
+      <div class="t">Missed call</div><div>(555) 203-7781 · while you were with a patient</div>`);
+    setTimeout(()=> pushNotif(`<div class="top"><span class="app" style="background:#22c55e">💬</span>Auto-text sent<span style="margin-left:auto">${now()}</span></div>
+      <div class="t">To (555) 203-7781</div><div>“Hi, this is Bright Harbor Dental — sorry we missed your call! Reply here or book in 30 seconds: brightharbor.example/book”</div>`), 1500);
+    setTimeout(()=> pushNotif(`<div class="top"><span class="app" style="background:#22c55e">💬</span>Messages<span style="margin-left:auto">${now()}</span></div>
+      <div class="t">(555) 203-7781 replied</div><div>“Hi! Need a cleaning for me and my son, any time Saturday?”</div>`), 3800);
+  };
+
+  // ---------- modal ----------
+  const modal = $('#modal');
+  $('#aboutBtn').onclick = () => modal.classList.add('open');
+  $('#closeModal').onclick = () => modal.classList.remove('open');
+  modal.onclick = e => { if (e.target === modal) modal.classList.remove('open'); };
+
+  // hint auto-hide
+  setTimeout(()=>{ if(!started) hint.style.display='block'; }, 100);
+})();
+</script>
+</body>
+</html>
