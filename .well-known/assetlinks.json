@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.dadashev3d.twa",
+        "sha256_cert_fingerprints": ["32:3E:B5:2D:F9:BA:68:E0:D2:A4:67:C5:4F:B0:55:96:06:AF:60:5C:BA:48:23:D9:AF:2F:17:B2:B8:94:54:FC"]
+      }
+    }]
